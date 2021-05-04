@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/services/auth.dart';
+import 'package:flutter_chat_app/views/signin.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,6 +10,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('Messenger Clone'),
+      actions: [
+        InkWell(
+          onTap: () {
+            AuthMethods().signOut().then((s) {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => SignIn()));
+            });
+          },
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.exit_to_app)),
+        )
+      ],
+    ));
   }
 }
